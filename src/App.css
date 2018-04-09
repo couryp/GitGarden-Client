@@ -26,3 +26,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.Main {
+  min-height: 70vh
+}
+
+.Splash {
+  background-image: url("./assets/electric-garden.png");
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .8
+}
+
+.Middle {
+  background-color: green;
+}

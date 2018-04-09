@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { Col } from 'react-materialize'
 
 
 class RepoMan extends Component {
@@ -48,7 +49,7 @@ class RepoMan extends Component {
   }
 
   componentDidMount() {
-    let userName = 'couryp'
+    let userName = 'abbotteverett'
     axios.get(`https://api.github.com/users/${userName}/repos?sort=pushed`)
       .then((response) => {
         this.setState({
@@ -66,9 +67,9 @@ class RepoMan extends Component {
       return <p key={i}>{lang[0]} : {lang[1]}</p>
     })
     return (
-      <div className="RepoMan">
+      <Col s={2} className="RepoMan">
         {holder}
-      </div>
+      </Col>
     )
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { Col } from 'react-materialize'
 
 
 class UserBuilder extends Component {
@@ -51,13 +52,13 @@ class UserBuilder extends Component {
       </div>
     }
     return (
-      <div className="UserBuilder">
+      <Col s={2} className="UserBuilder">
         <form onSubmit={e => this.usernameSubmit(e)}>
           <input ref="username" type="text" placeholder="username"/>
         </form>
         {userCard}
 
-      </div>
+      </Col>
     );
   }
 }
