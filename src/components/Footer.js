@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Footer } from 'react-materialize'
 
-class FooterBoy extends Component {
+class FooterThing extends Component {
   render() {
     return(
       <Footer className='footer calisto'>
-        <span>Developed by: <a href={'https://github.com/couryp'}>Patrick Coury</a></span>
+        <div>Developed by: <a href={'https://github.com/couryp'}>Patrick Coury</a></div>
       </Footer>
     )
   }
 }
 
-export default FooterBoy
+export default FooterThing

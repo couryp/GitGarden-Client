@@ -49,7 +49,7 @@ class RepoMan extends Component {
   }
 
   componentDidMount() {
-    let userName = 'abbotteverett'
+    let userName = 'just-hey'
     axios.get(`https://api.github.com/users/${userName}/repos?sort=pushed`)
       .then((response) => {
         this.setState({
@@ -67,9 +67,9 @@ class RepoMan extends Component {
       return <p key={i}>{lang[0]} : {lang[1]}</p>
     })
     return (
-      <Col s={2} className="RepoMan">
+      <div className="RepoMan">
         {holder}
-      </Col>
+      </div>
     )
   }
 }

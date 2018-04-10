@@ -52,13 +52,13 @@ class UserBuilder extends Component {
       </div>
     }
     return (
-      <Col s={2} className="UserBuilder">
+      <div className="UserBuilder">
         <form onSubmit={e => this.usernameSubmit(e)}>
           <input ref="username" type="text" placeholder="username"/>
         </form>
         {userCard}
 
-      </Col>
+      </div>
     );
   }
 }
