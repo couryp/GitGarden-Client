@@ -62,10 +62,11 @@ class RepoMan extends Component {
 
 
   render() {
-    console.log('woah dude',this.state.languageArray);
+
     let holder = this.state.languageArray.map((lang, i) => {
       return <p key={i}>{lang[0]} : {lang[1]}</p>
     })
+
     return (
       <div className="RepoMan">
         {holder}
