@@ -49,7 +49,7 @@ class RepoMan extends Component {
   }
 
   componentDidMount() {
-    let userName = 'just-hey'
+    let userName = 'mrkpvlvski'
     axios.get(`https://api.github.com/users/${userName}/repos?sort=pushed`)
       .then((response) => {
         this.setState({
@@ -62,7 +62,7 @@ class RepoMan extends Component {
 
 
   render() {
-
+    debugger
     let holder = this.state.languageArray.map((lang, i) => {
       return <p key={i}>{lang[0]} : {lang[1]}</p>
     })
