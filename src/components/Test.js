@@ -9,9 +9,43 @@ import DragControls from 'three-dragcontrols'
 import myTree from '../assets/lowpolytree.obj'
 import myTreeMTL from '../assets/lowpolytree.mtl'
 
+// import myGnome from '../assets/oj.obj' WORKS object.scale.set(20,20,20)
+// import myGnomeMTL from '../assets/oj.mtl'
+
+// import myGnome from '../assets/pine.obj' WORKS but blue tree
+// import myGnomeMTL from '../assets/pine.mtl'
+
+// import myGnome from '../assets/DatePalmTree.obj' WORKS but all black
+// import myGnomeMTL from '../assets/DatePalmTree.mtl'
+// import myGnome from '../assets/tree01.obj'
+// import myGnomeMTL from '../assets/tree01.mtl'
+
+// import myGnome from '../assets/bomb.obj' WORKS
+// import myGnomeMTL from '../assets/bomb.mtl'
+
+import myGnome from '../assets/pine.obj'
+import myGnomeMTL from '../assets/pine.mtl'
 
 var OrbitControls = require('three-orbit-controls')(THREE)
 
+
+let data = {
+  topLanguages: [
+    ['Javascript', 9001],
+    ['HTML', 2000],
+    ['CSS', 500]
+  ],
+  repoTones : {
+    firstRepo : 'angry',
+    secondRepo : 'confident',
+    thirdRepo : 'mad',
+    fourthRepo : 'happy',
+    fifthRepo : 'curse word',
+    sixthRepo : 'glad',
+    seventhRepo : 'angry'
+
+  }
+}
 
 class Test extends Component {
   constructor() {
@@ -22,7 +56,7 @@ class Test extends Component {
   }
 
   componentDidMount() {
-
+    console.log('data', data.topLanguages)
     const { width, height } = this.props
 
 
@@ -75,30 +109,55 @@ class Test extends Component {
 
 
     let trees = []
-    let mtlLoader = new MTLLoader();
-    console.log('here');
-       mtlLoader.load(myTreeMTL, function (materials) {
-         console.log('materials',materials);
-         materials.preload();
+    for(let i = 0; i < 3; i++) {
+      ;
+      let mtlLoader = new MTLLoader();
+         mtlLoader.load(myTreeMTL, function (materials) {
+           materials.preload();
 
-         let objLoader = new OBJLoader();
-         objLoader.setMaterials(materials);
+           let objLoader = new OBJLoader();
+           objLoader.setMaterials(materials);
 
-         objLoader.load(myTree, function (object) {
-           object.position.set(0,10,10)
-           console.log('this', object)
-           object.scale.set(10,10,10)
+           objLoader.load(myTree, function (object) {
+
+            if(i === 0) {
+              object.position.set(0,20,10)
+            } else if (i === 1) {
+              object.position.set(0,20,10)
+            } else {
+              console.log('else');
+              object.position.set(30,30,30)
+            }
 
 
+             object.scale.set(10,10,10)
 
-           scene.add(object);
-           trees.push(object)
+             scene.add(object);
+             trees.push(object)
+
+           });
 
          });
+    }
 
-       });
+
 
        console.log('trees', trees);
+
+       let testingMTL = new MTLLoader()
+       testingMTL.load(myGnomeMTL, function (materials2) {
+         materials2.preload()
+
+         let testingOBJ = new OBJLoader()
+         testingOBJ.setMaterials(materials2)
+
+         testingOBJ.load(myGnome, function (object2) {
+           object2.position.set(15, 25, 15)
+           object2.scale.set(3,3,3)
+
+           scene.add(object2)
+         })
+       })
 
     let spheres = []
     let sphereGeometry = new THREE.SphereGeometry(10,10,10)
@@ -133,7 +192,7 @@ class Test extends Component {
 
 
     const dragControls = new DragControls(spheres, camera, renderer.domElement)
-    const dragControlsTree = new DragControls(trees, camera, renderer.domElement)
+    // const dragControlsTree = new DragControls(trees, camera, renderer.domElement)
 
 
 
