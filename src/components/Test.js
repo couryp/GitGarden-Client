@@ -47,6 +47,8 @@ let data = {
   }
 }
 
+var mouse
+
 class Test extends Component {
   constructor() {
     super()
@@ -86,6 +88,10 @@ class Test extends Component {
     scene.add(fillLight);
     scene.add(backLight);
 
+    // let raycaster = new THREE.Raycaster()
+    // document.addEventListener( 'mousemove', onDocumentMouseMove, false )
+    // mouse = new THREE.Vector2(), INTERSECTED;
+
     let geometry = new THREE.PlaneBufferGeometry(100, 100,30)
     let texture = new THREE.CanvasTexture( this.generateTexture() )
 
@@ -110,7 +116,7 @@ class Test extends Component {
 
     let trees = []
     for(let i = 0; i < 3; i++) {
-      ;
+
       let mtlLoader = new MTLLoader();
          mtlLoader.load(myTreeMTL, function (materials) {
            materials.preload();
@@ -120,11 +126,12 @@ class Test extends Component {
 
            objLoader.load(myTree, function (object) {
 
+
             if(i === 0) {
               object.position.set(0,20,10)
             } else if (i === 1) {
-              object.position.set(0,20,10)
-            } else {
+              object.position.set(10,30,10)
+            } else if (i === 2){
               console.log('else');
               object.position.set(30,30,30)
             }
@@ -152,10 +159,10 @@ class Test extends Component {
          testingOBJ.setMaterials(materials2)
 
          testingOBJ.load(myGnome, function (object2) {
-           object2.position.set(15, 25, 15)
+           object2.position.set(-15, 25, 15)
            object2.scale.set(3,3,3)
 
-           scene.add(object2)
+           // scene.add(object2)
          })
        })
 
@@ -163,7 +170,7 @@ class Test extends Component {
     let sphereGeometry = new THREE.SphereGeometry(10,10,10)
     for(let i = 0; i < 50; i++) {
       let sphereMaker = new THREE.Mesh(sphereGeometry, new THREE.MeshLambertMaterial( {
-        color: Math.random() * 0xffffff
+        color: new THREE.Color(`rgb(255, 0, 0)`)
       })
     )
 
@@ -205,6 +212,21 @@ class Test extends Component {
       // camera.position.z = 80 * Math.sin( time );
       // camera.lookAt( scene.position );
       // controls.update()
+
+
+      // raycaster.setFromCamera( mouse, camera );
+			// 	var intersects = raycaster.intersectObjects( scene.children );
+			// 	if ( intersects.length > 0 ) {
+			// 		if ( INTERSECTED != intersects[ 0 ].object ) {
+			// 			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+			// 			INTERSECTED = intersects[ 0 ].object;
+			// 			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+			// 			INTERSECTED.material.emissive.setHex( 0xff0000 );
+			// 		}
+			// 	} else {
+			// 		if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+			// 		INTERSECTED = null;
+			// 	}
 			renderer.render(scene, camera)
 		};
 
@@ -224,7 +246,7 @@ class Test extends Component {
           context.fillStyle = 'hsl(0,0%,' + ( Math.random() * 50 + 50 ) + '%)'
           context.beginPath()
           context.arc( Math.random() * canvas.width, Math.random() * canvas.height, Math.random() + 0.15, 0, Math.PI * 2, true )
-          context.fill()
+          // context.fill()
 
       }
 
@@ -235,6 +257,14 @@ class Test extends Component {
       return canvas
 
   }
+
+
+  // onDocumentMouseMove = (e) => {
+  //   e.preventDefault()
+  //   mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+  //   mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+  //
+  // }
 
 
 

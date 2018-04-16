@@ -29,7 +29,7 @@ class App extends Component {
     e.preventDefault()
     let nonce = this.createNonce()
     localStorage.setItem('state', nonce)
-    console.log('dude', process.env.REACT_APP_CLIENTID)
+    console.log('env id', process.env.REACT_APP_CLIENTID)
     let reqParams = `client_id=${process.env.REACT_APP_CLIENTID}&scope=user%20public_repo&state=${nonce}&allow_signup=true`
 
     window.location.replace(`https://github.com/login/oauth/authorize?${reqParams}`)

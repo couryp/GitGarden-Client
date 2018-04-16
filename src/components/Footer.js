@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Footer } from 'react-materialize'
+// import { Footer } from 'react-materialize'
 
 class FooterThing extends Component {
   render() {
     return(
-      <Footer className='footer calisto'>
-        <div>Developed by: <a href={'https://github.com/couryp'}>Patrick Coury</a></div>
-      </Footer>
+      <div className="FooterWrap">
+        <div className='FooterStyle'>
+          <div>Developed by: <a href={'https://github.com/couryp'}  target="_blank">Patrick Coury</a></div>
+        </div>
+      </div>
     )
   }
 }

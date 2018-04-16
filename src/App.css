@@ -1,39 +1,21 @@
-.App {
-  text-align: center;
+* {
+  color: #15abc3;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+html {
+  background-color: #222226;
 }
 
 a {
-    color:black;
+    color:#15abc3;
     text-decoration:none;
 }
 
+
 .Main {
   min-height: 70vh;
+  background-color: #222226;
+
 }
 
 .Splash {
@@ -46,6 +28,7 @@ a {
 }
 
 .SplashBody {
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,32 +37,75 @@ a {
 
 
 .middy {
-  background-color: blue;
+  /* background-color: blue; */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80vh;
+  border: 3px solid rgba(21,171,195,1.0);
+  background-color: #222226;
+  border-radius: 1em
 }
 
 .lefty {
-  background-color: red;
-  height: 80vh
+  /* background-color: red; */
+  height: 80vh;
+  border: 3px solid rgba(21,171,195,1.0);
+  background-color: #222226;
+  border-radius: 1em
+
 }
 
 .righty {
-  background-color: green;
-  height: 80vh
+  /* background-color: green; */
+  height: 80vh;
+  border: 3px solid rgba(21,171,195,1.0);
+  background-color: #222226;
+  border-radius: 1em
 }
 
-.footer {
-  max-height: 10vh;
+.FooterStyle {
+  min-height: 10vh;
   position: fixed;
   width: 100vw;
   bottom: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgba(21,171,195,1.0);
+  background-color: #222226;
+  border-radius: 1em
+}
 
+.FooterWrap {
+  background-color: red;
+}
+
+.HeaderStyle {
+  min-height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222226;
+  border-radius: 1em;
+}
+
+.OctoSplash{
+  cursor: pointer;
 }
 
 .LoginStyle {
   margin: 20px 0px
+}
+
+
+.HeaderTest{
+  background-color: #222226;
+}
+
+.HeaderWrap {
+  border: 5px solid rgba(21,171,195,1.0);
+  background-color: #222226;
+  border-radius: 1em
 }

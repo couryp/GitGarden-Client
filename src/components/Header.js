@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
-import { Navbar, NavItem } from 'react-materialize'
+// import { Navbar, NavItem } from 'react-materialize'
+
+import GitGardenImage from '../assets/gitgarden.png'
 
 class HeaderThing extends Component {
   render() {
     return(
-      <Navbar brand='Git Garden' right>
-        <NavItem onClick={() => console.log('test click')}>Getting Schwifty</NavItem>
-        <NavItem href='components.html'>Components</NavItem>
-      </Navbar>
+      <div className="HeaderTest">
+        <div className="HeaderWrap">
+          <div className="HeaderStyle">
+            <img src={GitGardenImage} />
+          </div>
+        </div>
+      </div>
     )
   }
 }
 
 export default HeaderThing
+
+
+// <NavItem onClick={() => console.log('test click')}>Getting Schwifty</NavItem>
+// <NavItem href='components.html'>Components</NavItem>
