@@ -1,28 +1,17 @@
-<Route exact path="/test" render={props => (
-  <UserBuilder saveUser = {this.saveUser} {...props} />
-)} />
+# Git Garden
+
+Git Garden is a visual representation of a user's
 
 
-class App extends Component {
-  constructor(props){
-    super(props)
-    this.state= {
-      allData: {},
-      username: '',
-      id: null,
-      repoCount: null,
-      url: null,
-      avatar: null,
-    }
-  }
+## Built With
 
-  saveUser = (allData, username, id, repoCount, url, avatar) => {
-    this.setState{
+* [ES6](http://es6-features.org/) - Javascript ES6
+* [React](https://reactjs.org/) - React
+* [three.js](https://github.com/mrdoob/three.js/) - three.js
+* [Watson](https://www.ibm.com/watson/services/tone-analyzer/) - Watson Tone Analyzer
+* [Node.js](https://nodejs.org/en/) - Node
+* [PostgreSQL](https://www.postgresql.org/) - PostgreSQL
 
-      username: username,
-      id: id,
-      repoCount: repoCount,
-      url: url,
-      avatar: avatar
-    }
-  }
+## Developers
+
+* **Patrick Coury** - [Patriks's GitHub](https://github.com/couryp)
