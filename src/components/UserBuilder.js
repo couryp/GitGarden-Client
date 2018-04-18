@@ -4,13 +4,17 @@ import { Col } from 'react-materialize'
 
 
 class UserBuilder extends Component {
-  state = {
+
+  constructor(props) {
+    super(props)
+    this.state = {
       username: '',
       id: null,
       repoCount: null,
       url: null,
-      avatar: null,
+      avatar: null
     }
+  }
 
 
   getUser(username) {
@@ -37,30 +41,37 @@ class UserBuilder extends Component {
     console.log('user', user)
   }
 
+
+
   render() {
-    let userCard;
-    if(this.state.username) {
-      userCard =
-      <div>
-        <p className="App-intro">
-          welcome {this.state.username}<br />
-          id {this.state.id}<br />
-          repo count {this.state.repoCount}<br />
-          url {this.state.url}<br />
+
+    let holder = this.props.languageArray.map((lang, i) => {
+      return <p className="langTest" key={i}>{lang[0]} -> {lang[1]}</p>
+    })
+
+    let userCard =
+      <div className="UserStyle">
+        <p>
+          Welcome {this.props.username}<br />
+          Id number {this.props.id}<br />
+          From {this.props.location}<br />
         </p>
-        <img height ='64' width='64'src={this.state.avatar}/>
+        <img border='3px solid rgba(21,171,195,1.0)' height ='64' width='64'src={this.props.avatar}/>
       </div>
-    }
+
     return (
       <div className="UserBuilder">
-        <form onSubmit={e => this.usernameSubmit(e)}>
-          <input ref="username" type="text" placeholder="username"/>
-        </form>
-        {userCard}
 
+        {userCard}
+        <p className="langTest">TOTAL CODE AMOUNT:</p>
+        {holder}
       </div>
     );
   }
 }
 
 export default UserBuilder;
+
+//  <form onSubmit={e => this.usernameSubmit(e)}>
+  //   <input ref="username" type="text" placeholder="username"/>
+  // </form>

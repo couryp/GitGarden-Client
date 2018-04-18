@@ -3,7 +3,7 @@ import { Row, Col } from 'react-materialize'
 import { Route } from 'react-router-dom'
 import axios from 'axios'
 import UserBuilder from './UserBuilder'
-import RepoMan from './RepoMan'
+import Key from './Key'
 import Test from './Test'
 import Side from './Side'
 
@@ -15,7 +15,7 @@ class Main extends Component {
       recentRepos: {},
       languageRepos: {},
       languageArray: [],
-      commitArray: []
+      commitArray: [],
     }
   }
 
@@ -60,9 +60,10 @@ class Main extends Component {
       })
   }
 
-  getRepoCommit = () => {
-    axios.post('http://localhost:8080/watson/analyzeTone', this.state.recentRepos)
+  getCommits = (username) => {
+    axios.get(`http://localhost:8080/commits/${username}`)
       .then(res => {
+        console.log('Got commits???', res.data);
         this.setState({
           commitArray: res.data
         })
@@ -70,14 +71,10 @@ class Main extends Component {
       .catch(err => {
         console.log(err)
       })
-
   }
 
-  componentDidMount() {
-    let userName = 'couryp'
-
-
-    axios.get(`https://api.github.com/users/${userName}/repos?sort=pushed`)
+  getUserLang = (username) => {
+    axios.get(`https://api.github.com/users/${username}/repos?sort=pushed`)
       .then((response) => {
 
         //limit repos
@@ -88,7 +85,7 @@ class Main extends Component {
         })
 
         this.repoBro()
-        this.getRepoCommit()
+        // this.getCommits()
       })
       .catch(e => {
 
@@ -96,17 +93,28 @@ class Main extends Component {
       })
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('HAS username', nextProps.username);
+    if (nextProps.username) {
+      this.getUserLang(nextProps.username)
+      this.getCommits(nextProps.username)
+    }
+  }
+
   render() {
     return(
       <Row className="Main">
         <Col s={3} className="lefty">
-          <UserBuilder />
+        { this.props.username
+          ? <UserBuilder languageArray={this.state.languageArray} username={this.props.username} id={this.props.id} avatar={this.props.avatar} location={this.props.location}/>
+          : null
+        }
         </Col>
         <Col s={6} className="middy">
           { this.state.commitArray.length ? <Side width={600} height={400} commits={this.state.commitArray}/> : null}
         </Col>
         <Col s={3} className="righty">
-          <RepoMan languageArray={this.state.languageArray} />
+          <Key />
         </Col>
       </Row>
     )
@@ -116,5 +124,5 @@ class Main extends Component {
 export default Main
 
 // <Route path="/test" component={UserBuilder} />
-// <Route path ="/test" component={RepoMan} />
+// <Route path ="/test" component={Key} />
 //<Col s={8} className='Middle'></Col>

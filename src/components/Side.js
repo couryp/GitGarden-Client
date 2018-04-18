@@ -15,13 +15,13 @@ class Side extends Component {
   }
 
   componentDidMount() {
-
+    console.log('props', this.props);
 
     const { width, height, commits } = this.props
 
     let scene = new THREE.Scene()
-    scene.background = new THREE.Color( 0xf0f0f0 )
-    /* 0x222226 */
+    scene.background = new THREE.Color( 0x404040 )
+    /* 0x222226 f0f0f0 */
 
     let frustumSize = 1000;
     let radius = 500
@@ -29,32 +29,35 @@ class Side extends Component {
     let aspect = width / height;
 		let	camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 )
 
-    let ambientLight = new THREE.AmbientLight( 0xfefefe)
+    let ambientLight = new THREE.AmbientLight( 0xfefefe )
     scene.add(ambientLight)
-    let light = new THREE.SpotLight( 0xdadada,1.5)
+    let light = new THREE.SpotLight( 0xdadada,1.5 )
     light.position.set(0,30,500)
     scene.add(light)
 
-
+    let toneColors = {
+      anger: `rgb(206, 10, 62)`,
+      fear: `rgb(177, 8, 224)`,
+      joy: `rgb(255, 256, 0)`,
+      sadness: `rgb(0, 8, 255)`,
+      disgust: `rgb(8, 224, 52)`
+      // analytical: `rgb(0, 175, 55)`,
+      // confident: `rgb(123, 0, 175)`,
+      // tentative: `rgb(0, 255, 216)`
+    }
 
     let rectangles = []
     let geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
       commits.forEach(commitArray => {
-        console.log('look here', commitArray);
-        for ( let i = 0; i < commitArray.length; i ++ ) {
-          let newColor = commitArray[i].watson.tone
+        console.log('commitarray', commitArray)
+        //commitArray.length
+        // for ( let i = 0; i < 20; i ++ ) {
+          // console.log('look here', commitArray[i]);
+          // let newColor = commitArray[i].watson.tone
+          let newColor = commitArray.emotion_name
           console.log('newcolor', newColor);
-          let toneColors = {
-            anger: `rgb(206, 10, 62)`,
-            fear: `rgb(124, 54, 7)`,
-            joy: `rgb(255, 256, 0)`,
-            sadness: `rgb(0, 8, 255)`,
-            analytical: `rgb(0, 175, 55)`,
-            confident: `rgb(123, 0, 175)`,
-            tentative: `rgb(0, 255, 216)`
-          }
 
-          let object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: new THREE.Color(toneColors.newColor) } ) );
+          let object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: new THREE.Color(toneColors[newColor]) } ) );
           object.position.x = Math.random() * 800 - 400;
           object.position.y = Math.random() * 800 - 400;
           object.position.z = Math.random() * 800 - 400;
@@ -66,7 +69,7 @@ class Side extends Component {
           object.scale.z = Math.random() + 0.5;
           scene.add( object );
           rectangles.push(object)
-        }
+        // }
       })
 
     let mouse = new THREE.Vector2(), INTERSECTED;
@@ -124,7 +127,7 @@ class Side extends Component {
 }
 
   render() {
-    const { width, height } = this.props
+    const { width, height, commits } = this.props
     return (
       <div ref="anchor" style={{width, height}} />
     )

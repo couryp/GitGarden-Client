@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Navbar, NavItem } from 'react-materialize'
 
-import GitGardenImage from '../assets/gitgarden.png'
+import GitGalaxyImage from '../assets/gitgalaxy.png'
 
 class HeaderThing extends Component {
   render() {
@@ -9,7 +9,7 @@ class HeaderThing extends Component {
       <div className="HeaderTest">
         <div className="HeaderWrap">
           <div className="HeaderStyle">
-            <img src={GitGardenImage} />
+            <img src={GitGalaxyImage} />
           </div>
         </div>
       </div>

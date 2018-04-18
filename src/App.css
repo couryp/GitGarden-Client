@@ -1,5 +1,10 @@
 * {
   color: #15abc3;
+  font-family: 'Source Code Pro', monospace;
+  border-color: rgb(36,198,224);
+  -moz-box-shadow: 10 10 10px rgba(36,198,224,1.0);
+  -moz-box-shadow: 10 10 10px rgba(36,198,224,0.9);
+  text-shadow: 0 0 8px rgba(36,198,224,1.0);
 }
 
 html {
@@ -44,7 +49,8 @@ a {
   height: 80vh;
   border: 3px solid rgba(21,171,195,1.0);
   background-color: #222226;
-  border-radius: 1em
+  border-radius: 1em;
+
 }
 
 .lefty {
@@ -108,4 +114,19 @@ a {
   border: 5px solid rgba(21,171,195,1.0);
   background-color: #222226;
   border-radius: 1em
+}
+
+.Key {
+  font-size: 1.5em;
+  text-align: center;
+  padding-top: 10vh;
+}
+
+.langTest {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.UserBuilder {
+  font-size: 1em
 }

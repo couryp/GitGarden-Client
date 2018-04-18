@@ -170,7 +170,7 @@ class Test extends Component {
     let sphereGeometry = new THREE.SphereGeometry(10,10,10)
     for(let i = 0; i < 50; i++) {
       let sphereMaker = new THREE.Mesh(sphereGeometry, new THREE.MeshLambertMaterial( {
-        color: new THREE.Color(`rgb(255, 0, 0)`)
+        color: new THREE.Color(Math.random() * 0xffffff)
       })
     )
 
