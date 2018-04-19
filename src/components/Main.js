@@ -7,6 +7,8 @@ import Key from './Key'
 import Test from './Test'
 import Side from './Side'
 
+import LoadGif from '../assets/loading2.gif'
+
 class Main extends Component {
 
   constructor(props) {
@@ -78,7 +80,7 @@ class Main extends Component {
       .then((response) => {
 
         //limit repos
-        let recentRepos = response.data.slice(0,1)
+        let recentRepos = response.data.slice(0,7)
 
         this.setState({
           recentRepos: recentRepos

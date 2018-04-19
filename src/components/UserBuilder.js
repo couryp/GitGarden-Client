@@ -56,7 +56,7 @@ class UserBuilder extends Component {
           Id number {this.props.id}<br />
           From {this.props.location}<br />
         </p>
-        <img border='3px solid rgba(21,171,195,1.0)' height ='64' width='64'src={this.props.avatar}/>
+        <img className="UserPic" border='3px solid rgba(21,171,195,1.0)' height ='64' width='64'src={this.props.avatar}/>
       </div>
 
     return (

@@ -119,14 +119,29 @@ a {
 .Key {
   font-size: 1.5em;
   text-align: center;
-  padding-top: 10vh;
+  padding-top: 5vh;
 }
 
 .langTest {
-  font-size: 1.5em;
+  font-size: 1.3em;
   text-align: center;
 }
 
 .UserBuilder {
   font-size: 1em
+}
+
+.UserStyle {
+  font-size: 1.3em;
+  text-align: center;
+
+}
+
+.UserPic {
+  border-radius: 2px
+}
+
+.commitThree {
+  text-align: center;
+  font-size: 1em;
 }

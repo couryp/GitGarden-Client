@@ -6,22 +6,28 @@ import MTLLoader from 'three-react-mtl-loader'
 import DragControls from 'three-dragcontrols';
 
 
+let mouse;
+
 class Side extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      x: 0,
+      y: 0,
+      commitMsg: "",
+      toneName: '',
+      toneScore: 0
     }
   }
 
   componentDidMount() {
-    console.log('props', this.props);
+    // console.log('props', this.props);
 
     const { width, height, commits } = this.props
 
     let scene = new THREE.Scene()
-    scene.background = new THREE.Color( 0x404040 )
-    /* 0x222226 f0f0f0 */
+    scene.background = new THREE.Color( 0x222226 )
+    /* 0x222226 f0f0f0 404040 */
 
     let frustumSize = 1000;
     let radius = 500
@@ -49,15 +55,18 @@ class Side extends Component {
     let rectangles = []
     let geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
       commits.forEach(commitArray => {
-        console.log('commitarray', commitArray)
+        // console.log('commitarray', commitArray)
         //commitArray.length
         // for ( let i = 0; i < 20; i ++ ) {
-          // console.log('look here', commitArray[i]);
-          // let newColor = commitArray[i].watson.tone
+        //   console.log('look here', commitArray[i]);
+        //   let newColor = commitArray[i].emotion_name
           let newColor = commitArray.emotion_name
-          console.log('newcolor', newColor);
+          // console.log('newcolor', newColor);
 
           let object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: new THREE.Color(toneColors[newColor]) } ) );
+          object.commitname = commitArray.message
+          object.tonename = commitArray.emotion_name
+          object.tonescore = commitArray.emotion_score
           object.position.x = Math.random() * 800 - 400;
           object.position.y = Math.random() * 800 - 400;
           object.position.z = Math.random() * 800 - 400;
@@ -72,8 +81,10 @@ class Side extends Component {
         // }
       })
 
-    let mouse = new THREE.Vector2(), INTERSECTED;
-    console.log(mouse, 'mouse');
+    mouse = new THREE.Vector2();
+    var INTERSECTED;
+
+    // console.log('this right here document window stuff', window.document, document);
     let raycaster = new THREE.Raycaster();
 
     let renderer = new THREE.WebGLRenderer()
@@ -82,10 +93,11 @@ class Side extends Component {
 
     this.refs.anchor.appendChild(renderer.domElement)
 
-    this.refs.anchor.addEventListener('mousemove', mouseMovement, false )
+
+    // document.addEventListener('mousemove', mouseMovement, false )
     // this.refs.anchor.addEventListener('onMouseMove', mouseMovement, false )
 
-    let animate = function () {
+    let animate = () => {
 			requestAnimationFrame( animate )
       theta += 0.1;
 			camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
@@ -98,14 +110,19 @@ class Side extends Component {
       let intersects = raycaster.intersectObjects( scene.children )
 
       if ( intersects.length > 0 ) {
+        // console.log('intersect', intersects);
 					if ( INTERSECTED != intersects[ 0 ].object ) {
-						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 						INTERSECTED = intersects[ 0 ].object;
-						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-						INTERSECTED.material.emissive.setHex( 0xff0000 );
+						// console.log('INTERSECTED', INTERSECTED);
+            // console.log(this.state.commitMsg);
+            this.setState({
+              commitMsg: INTERSECTED.commitname,
+              toneName: INTERSECTED.tonename,
+              toneScore: INTERSECTED.tonescore
+            })
 					}
 				} else {
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+					// if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 					INTERSECTED = null;
 				}
 
@@ -115,21 +132,40 @@ class Side extends Component {
 
     animate()
 
-    let mouseMovement = (e) => {
-      e.preventDefault()
-      console.log('weeeee', mouse.x, mouse.y);
-      // mouse.x = ( e.clientX / width ) * 2 - 1;
-			// mouse.y = - ( e.clientY / height ) * 2 + 1;
-      mouse.x = ( e.pageX / width ) * 2 - 1;
-			mouse.y = - ( e.pageY / height ) * 2 + 1;
-    }
+    // let mouseMovement = (e) => {
+    //   e.preventDefault()
+    //   console.log('weeeee', mouse.x, mouse.y);
+    //   // mouse.x = ( e.clientX / width ) * 2 - 1;
+		// 	// mouse.y = - ( e.clientY / height ) * 2 + 1;
+    //   mouse.x = ( e.pageX / width ) * 2 - 1;
+		// 	mouse.y = - ( e.pageY / height ) * 2 + 1;
+    // }
+
 
 }
 
+  onMouseMove = (e) => {
+  // console.log('coordinates', this.state.x, this.state.y)
+  // // console.log(mouse.x, mouse.y);
+  mouse.x = ( e.screenX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( e.screenY / window.innerHeight ) * 2 + 1
+  // mouse.x = (e.screenX / this.props.width) * 2 - 1
+  // mouse.y = - ( e.screenY / this.props.height ) * 2 + 1
+  // mouse.x = e.screenX - this.refs.anchor.offsetLeft
+  // mouse.y = e.screenY - this.refs.anchor.offsetTop
+  // console.log('mouse', mouse.x, mouse.y)
+  // this.setState({ x: e.screenX, y: e.screenY });
+  }
+
   render() {
+
     const { width, height, commits } = this.props
     return (
-      <div ref="anchor" style={{width, height}} />
+      <div className="centerPanel">
+        <div className="commitThree">{this.state.commitMsg.slice(0,50)} / {this.state.toneName} / {this.state.toneScore}</div>
+        <span/>
+        <div ref="anchor" style={{width, height}} onMouseMove={this.onMouseMove} />
+      </div>
     )
   }
 }
@@ -137,3 +173,4 @@ class Side extends Component {
 export default Side
 
 //Math.random() * 0xffffff
+//const { x, y } = this.state
