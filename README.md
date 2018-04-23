@@ -38,5 +38,5 @@ Git Galaxy is a React browser application that visually represents a user's rece
 ## GitHub OAuth:
 ![Alt text](./src/assets/galaxy2.png)
 
-## Quiz Yourself:
+## Explore Git Galaxy:
 ![Alt text](./src/assets/galaxy3.png)
