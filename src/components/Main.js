@@ -52,7 +52,7 @@ class Main extends Component {
             return b[1] - a[1]
         });
         this.setState({
-          languageArray: langArray.slice(0,3)
+          languageArray: langArray
         })
       })
       .catch(e => {
