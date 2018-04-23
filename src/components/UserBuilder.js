@@ -44,7 +44,7 @@ class UserBuilder extends Component {
 
 
   render() {
-
+    // console.log('this.props.languageArray', this.props.languageArray);
     let holder = this.props.languageArray.map((lang, i) => {
       return <p className="langTest" key={i}>{lang[0]} -> {lang[1]}</p>
     })
@@ -63,7 +63,7 @@ class UserBuilder extends Component {
       <div className="UserBuilder">
 
         {userCard}
-        <p className="langTest">TOTAL CODE AMOUNT:</p>
+        <p className="langTest">TOP 3 LANGUAGES:</p>
         {holder}
       </div>
     );

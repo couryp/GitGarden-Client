@@ -8,7 +8,7 @@ import DragControls from 'three-dragcontrols';
 
 let mouse;
 
-class Side extends Component {
+class Canvas extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -47,9 +47,6 @@ class Side extends Component {
       joy: `rgb(255, 256, 0)`,
       sadness: `rgb(0, 8, 255)`,
       disgust: `rgb(8, 224, 52)`
-      // analytical: `rgb(0, 175, 55)`,
-      // confident: `rgb(123, 0, 175)`,
-      // tentative: `rgb(0, 255, 216)`
     }
 
     let rectangles = []
@@ -84,7 +81,7 @@ class Side extends Component {
     mouse = new THREE.Vector2();
     var INTERSECTED;
 
-    // console.log('this right here document window stuff', window.document, document);
+    // console.log('document window', window.document, document);
     let raycaster = new THREE.Raycaster();
 
     let renderer = new THREE.WebGLRenderer()
@@ -99,12 +96,12 @@ class Side extends Component {
 
     let animate = () => {
 			requestAnimationFrame( animate )
-      theta += 0.1;
-			camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-			camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
-			camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+      theta += 0.1
+			camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) )
+			camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) )
+			camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) )
 			camera.lookAt( scene.position )
-      camera.updateMatrixWorld();
+      camera.updateMatrixWorld()
 
       raycaster.setFromCamera( mouse, camera )
       let intersects = raycaster.intersectObjects( scene.children )
@@ -138,15 +135,14 @@ class Side extends Component {
     //   // mouse.x = ( e.clientX / width ) * 2 - 1;
 		// 	// mouse.y = - ( e.clientY / height ) * 2 + 1;
     //   mouse.x = ( e.pageX / width ) * 2 - 1;
-		// 	mouse.y = - ( e.pageY / height ) * 2 + 1;
+		// 	mouse.y = - ( e.pageY / height ) * 2 + 1
     // }
 
 
 }
 
   onMouseMove = (e) => {
-  // console.log('coordinates', this.state.x, this.state.y)
-  // // console.log(mouse.x, mouse.y);
+
   mouse.x = ( e.screenX / window.innerWidth ) * 2 - 1;
   mouse.y = - ( e.screenY / window.innerHeight ) * 2 + 1
   // mouse.x = (e.screenX / this.props.width) * 2 - 1
@@ -162,7 +158,7 @@ class Side extends Component {
     const { width, height, commits } = this.props
     return (
       <div className="centerPanel">
-        <div className="commitThree">{this.state.commitMsg.slice(0,50)} / {this.state.toneName} / {this.state.toneScore}</div>
+        <div className="commitThree">{this.state.commitMsg.slice(0,40)} / {this.state.toneName} / {this.state.toneScore}</div>
         <span/>
         <div ref="anchor" style={{width, height}} onMouseMove={this.onMouseMove} />
       </div>
@@ -170,7 +166,7 @@ class Side extends Component {
   }
 }
 
-export default Side
+export default Canvas
 
 //Math.random() * 0xffffff
 //const { x, y } = this.state

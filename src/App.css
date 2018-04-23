@@ -125,6 +125,8 @@ a {
 .langTest {
   font-size: 1.3em;
   text-align: center;
+  overflow-y: scroll;
+
 }
 
 .UserBuilder {

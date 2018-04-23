@@ -37,4 +37,4 @@ class Key extends Component {
   }
 }
 
-export default Key;
+export default Key

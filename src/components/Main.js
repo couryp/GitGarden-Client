@@ -5,7 +5,7 @@ import axios from 'axios'
 import UserBuilder from './UserBuilder'
 import Key from './Key'
 import Test from './Test'
-import Side from './Side'
+import Canvas from './Canvas'
 
 import LoadGif from '../assets/loading2.gif'
 
@@ -44,20 +44,18 @@ class Main extends Component {
       })
       .then(test => {
 
-        let swag = []
+        let langArray = []
         for (let value in this.state.languageRepos) {
-            swag.push([value, this.state.languageRepos[value]]);
+            langArray.push([value, this.state.languageRepos[value]])
         }
-        swag.sort(function(a, b) {
-            return b[1] - a[1];
+        langArray.sort(function(a, b) {
+            return b[1] - a[1]
         });
         this.setState({
-          languageArray: swag
+          languageArray: langArray.slice(0,3)
         })
-        console.log('final', this.state.languageArray);
       })
       .catch(e => {
-
         console.log(e)
       })
   }
@@ -79,7 +77,6 @@ class Main extends Component {
     axios.get(`https://api.github.com/users/${username}/repos?sort=pushed`)
       .then((response) => {
 
-        //limit repos
         let recentRepos = response.data.slice(0,7)
 
         this.setState({
@@ -87,7 +84,6 @@ class Main extends Component {
         })
 
         this.repoBro()
-        // this.getCommits()
       })
       .catch(e => {
 
@@ -96,7 +92,7 @@ class Main extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('HAS username', nextProps.username);
+    // console.log('username', nextProps.username);
     if (nextProps.username) {
       this.getUserLang(nextProps.username)
       this.getCommits(nextProps.username)
@@ -113,7 +109,7 @@ class Main extends Component {
         }
         </Col>
         <Col s={6} className="middy">
-          { this.state.commitArray.length ? <Side width={600} height={400} commits={this.state.commitArray}/> : null}
+          { this.state.commitArray.length ? <Canvas width={600} height={400} commits={this.state.commitArray}/> : null}
         </Col>
         <Col s={3} className="righty">
           <Key />
